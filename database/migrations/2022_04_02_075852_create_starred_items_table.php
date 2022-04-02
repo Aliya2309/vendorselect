@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class StarredItems extends Migration
+class CreateStarredItemsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -17,8 +17,10 @@ class StarredItems extends Migration
             $table->id();
             $table->string('name');
             $table->string('link');
+            $table->string('rating');
+            $table->string('review');
+            $table->string('price');
             $table->integer('user_id');
-
         });
     }
 

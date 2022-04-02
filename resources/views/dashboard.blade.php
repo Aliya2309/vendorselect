@@ -18,6 +18,8 @@
                     
                     <button type="submit">Search</button>
 
+                <h5><a href = '/starred'> Starred products </a></h5>
+
             </div>
         </div>
     </div>

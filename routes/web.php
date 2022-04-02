@@ -26,4 +26,8 @@ Route::post('searchpage', 'App\Http\Controllers\UserController@searchbar');
 
 //routes to the specific product page which will run sentiment algorithm as well as
 // give all info about the product
-Route::get('product/{name}', 'App\Http\Controllers\UserController@iteminfo');
+Route::get('product/{id}', 'App\Http\Controllers\UserController@productinfo');
+
+Route::get('starred', 'App\Http\Controllers\UserController@starreditems');
+
+Route::get('addstarred/{$id}', 'App\Http\Controllers\UserController@addtostarred');

@@ -1,7 +1,8 @@
 <a href="/"> Go Back </a><br><br>
 
 <?php
-//echo 'hello';
+
+$product_name = $product['name'];
 
 $url = "http://127.0.0.1:5000/";
 
@@ -24,3 +25,5 @@ echo $response_json;
 
         
    ?>
+
+   <a href="/addstarred/{{$product['id']}}"> Add this product to your starred items </a>
