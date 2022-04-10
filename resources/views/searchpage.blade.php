@@ -4,7 +4,22 @@
 @foreach($products as $i)
 <div> 
     <br>
-    <a href="product/{{$i['id']}}">{{$i->name}}</a></div>
+    <a href="product/{{$i['Product Name']}}">{{$i->name}}</a></div>
+    <div> 
+    <br>
+    <a href="product/{{$i['URL']}}">{{$i->link}}</a></div>
+    <div> 
+    <br>
+    <a href="product/{{$i['Ratings']}}">{{$i->ratings}}</a></div>
+    <div> 
+    <br>
+    <a href="product/{{$i['Reviews']}}">{{$i->reviews}}</a></div>
+    <div> 
+    <br>
+    <a href="product/{{$i['Price']}}">{{$i->price}}</a></div>
+    <div> 
+    <br>
+    <a href="product/{{$i['Image']}}">{{$i->image}}</a></div>
 <!--<div> {{$i->description}}</div>
 <div> Rupees. {{$i->price}}</div>
 <div> Category: {{$i->category}}</div> -->
