@@ -22,13 +22,14 @@ class UserController extends Controller
         //new object of the products model
         $p_db = new Product;
 
-        //taking all info from the json file the api returned
+         //taking all info from the json file the api returned
         //enter correct json info here
-        $p_db->name = $products['name'];
-        $p_db->link = $products['name'];
-        $p_db->rating = $products['name'];
-        $p_db->review = $products['name'];
-        $p_db->price = $products['name'];
+        $p_db->name = $server_output['Product Name'];
+        $p_db->link = $server_output['URL'];
+        $p_db->rating = $server_output['Ratings'];
+        $p_db->review = $server_output['Reviews'];
+        $p_db->price = $server_output['Price'];
+        $p_db->image = $server_output['Image'];
         $user=auth()->user();
         $uid = $user -> id;
         $p_db->user_id = $uid;
@@ -71,6 +72,7 @@ class UserController extends Controller
         $s_db->rating = $selected_product['rating'];
         $s_db->review = $selected_product['review'];
         $s_db->price = $selected_product['price'];
+        $s_db->image = $selected_product['image'];
         $s_db->user_id = $uid;
 
         //save in db
