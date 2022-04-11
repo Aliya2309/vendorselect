@@ -15,29 +15,59 @@ class UserController extends Controller
         //$products=Items::where('name', $items)->get();
         // $products will have list of returned items by parser
         //curl to the products search api here
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL,"http://127.0.0.1:5001/".$items);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 
+
+        $server_output = curl_exec($ch);
+
+        curl_close($ch);
+        echo $server_output;
+        $output = json_decode(json_decode($server_output, true),true);
         //clearing db for new search results
         Product::truncate();
+        foreach($output as $key => $value){
+            $p_db = new Product;
+            //taking all info from the json file the api returned
+            //enter correct json info here
+            if($value){
+                $p_db->name = $value['Product Name'];
+                $p_db->link = $value['URL'];
+                $p_db->rating = $value['Ratings'];
+                $p_db->review = $value['Reviews'];
+                $p_db->price = $value['Price'];
+                //$p_db->image = $value['Image'];
+                $user=auth()->user();
+                $uid = $user -> id;
+                $p_db->user_id = $uid;
+
+            //save to db
+                $p_db->save();
+            }
+        }
+
 
         //new object of the products model
-        $p_db = new Product;
+        // $p_db = new Product;
 
         //taking all info from the json file the api returned
         //enter correct json info here
-        $p_db->name = $products['name'];
-        $p_db->link = $products['name'];
-        $p_db->rating = $products['name'];
-        $p_db->review = $products['name'];
-        $p_db->price = $products['name'];
-        $user=auth()->user();
-        $uid = $user -> id;
-        $p_db->user_id = $uid;
+        // $p_db->name = $products['name'];
+        // $p_db->link = $products['name'];
+        // $p_db->rating = $products['name'];
+        // $p_db->review = $products['name'];
+        // $p_db->price = $products['name'];
+        // $user=auth()->user();
+        // $uid = $user -> id;
+        // $p_db->user_id = $uid;
 
         //save to db
-        $p_db->save();
+       // $p_db->save();
 
         //returns json of products to the searchpage
-        return view('searchpage', ['products'=>$products]);
+        //return view('searchpage', ['products'=>$products]);
+        return view('searchpage',  ['products'=>$server_output]);
     }
 
     public function productinfo($id){

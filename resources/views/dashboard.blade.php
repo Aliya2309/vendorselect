@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        <h2 class="font-bold text-xl text-gray-800 leading-tight">
             {{ __('Dashboard') }}
         </h2>
     </x-slot>
@@ -10,7 +10,7 @@
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                 Search bar here
 
-                <h4>SEARCH PRODUCT: </h4>
+                <h4 class="font-semibold">SEARCH PRODUCT: </h4>
                 <form action="searchpage" method="post">
                 
                     <label > Name <label>
