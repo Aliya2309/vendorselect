@@ -2,60 +2,88 @@
 
 <?php
 
-echo $product;
+foreach($product as $product)
+{
 
-$strlink = strval($product['link']);
-$ch = curl_init();
-$link = array('link' => $strlink);
-$abc = json_encode($link, JSON_FORCE_OBJECT);
-curl_setopt($ch, CURLOPT_URL,"http://127.0.0.1:5002/");
-curl_setopt($ch, CURLOPT_POST, 1);
-curl_setopt($ch, CURLOPT_POSTFIELDS, $abc);
-// Receive server response ...
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-$server_output = curl_exec($ch);
-curl_close ($ch);
-echo $server_output;
+      $strlink = strval($product['link']);
+      $ch = curl_init();
+      $link = array('link' => $strlink);
+      $abc = json_encode($link, JSON_FORCE_OBJECT);
+      curl_setopt($ch, CURLOPT_URL,"http://127.0.0.1:5002/");
+      curl_setopt($ch, CURLOPT_POST, 1);
+      curl_setopt($ch, CURLOPT_POSTFIELDS, $abc);
+      // Receive server response ...
+      curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+      $server_output = curl_exec($ch);
+      curl_close ($ch);
+      
+      //this is the reviews
+      //echo $server_output;
 
-$product_name = $product['name'];
-$pieces = explode(" ", $product_name);
-$first_part = implode(" ", array_splice($pieces, 0, 3));
-$name = array('name' => $first_part);
-$product = json_encode($name, JSON_FORCE_OBJECT);
+      $output = json_decode(json_decode($server_output, true),true);
+      foreach($output as $key => $value)
+      {
+            if ($value['name'] == 'Amazon Customer')
+            {
+                  continue;
+            }
+            echo "name: ".$value['name']."<br><br>";
+            echo "review: ".$value['review']."<br><br>";
+           
+      }
+
+      
+     
+
+      $product_name = $product['name'];
+      $pieces = explode(" ", $product_name);
+      $first_part = implode(" ", array_splice($pieces, 0, 3));
+      $name = array('name' => $first_part);
+      $jsonproduct = json_encode($name, JSON_FORCE_OBJECT);
+
+      echo "<br><br> REVIEW DONE";
+
+      $url = "http://127.0.0.1:5000/";
+
+      $url .= $first_part;
+
+      $ch = curl_init();
+      curl_setopt($ch, CURLOPT_URL,"http://127.0.0.1:5000/");
+      curl_setopt($ch, CURLOPT_POST, 1);
+      curl_setopt($ch, CURLOPT_POSTFIELDS, $jsonproduct);
+      // Receive server response ...
+      curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+      $response_json = curl_exec($ch);
+      curl_close($ch);
+      $tweets = json_decode(json_decode($response_json, true), true);
+
+      echo gettype($tweets);
+
+      foreach($tweets as $key => $value)
+      {
+            if($key == 'prediction')
+            {
+                  continue;
+            }
+            if($key == 'tweets')
+            {
+                  foreach($value as $v)     {
+                        echo "name: ".$v."<br><br>";}
+            }
+      }
 
 
-
-$url = "http://127.0.0.1:5000/";
-
-$url .= $first_part;
-
-$ch = curl_init();
-curl_setopt($ch, CURLOPT_URL,"http://127.0.0.1:5000/");
-curl_setopt($ch, CURLOPT_POST, 1);
-curl_setopt($ch, CURLOPT_POSTFIELDS, $product);
-// Receive server response ...
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-
-$response_json = curl_exec($ch);
-curl_close($ch);
-
-echo $response_json;
-/*echo"Product Details:  ".'<br><br>';
-    foreach($product as $p){
-       echo "NAME:   ".$p['name'].'<br><br>';
-        echo "DESCRIPTION:".$p['description'].'<br><br>';
-        echo "CATEGORY:  ".$p['category'].'<br><br>';
-       echo "PRICE:  ".$p['price'].'<br><br>';
-    }*/
-
-        
-   // $id = strval($product['id']);
-   $id=1; 
-
-  ?>
+      //this is sentiment analysis json. it has 
+      echo $response_json;
 
 
+      $id_starred = $product['id'];
+}
+?>
 
-<a href="/addstarred/{{$id}}"> Add this product to your starred items </a>
 
+<a href="/addstarred/{{$id_starred}}"> Add this product to your starred items </a>
+
+ 
 

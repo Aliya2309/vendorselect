@@ -1,14 +1,26 @@
+@extends('master')
+@section('content')
 
-<a href="/"> Go Back </a><br><br>
-<h4>Your Search Produced the following results:  </h4><br><br>
+    <h3>Search Results</h3>
+
+    <h4>Your Search Produced the following results:  </h4><br><br>
 <?php
-$output = json_decode(json_decode($products, true),true);
-foreach($output as $p){
-    echo "NAME:   ".$p['Product Name'].'<br><br>';
-     echo "LINK:".$p['URL'].'<br><br>';
-     echo "RATINGS:  ".$p['Ratings'].'<br><br>';
-    echo "REVIEWS:  ".$p['Reviews'].'<br><br>';
-    echo "PRICE:  ".$p['Price'].'<br><br>';
+//$output = json_decode(json_decode($products, true),true);
+foreach($products as $p){
+    ?>
+    <a href = "/product/{{$p['id']}}"><?php echo "NAME:   ".$p['name'].'<br><br>'; ?> </a>
+    <?php
+     echo "LINK:".$p['link'].'<br><br>';
+     echo "RATINGS:  ".$p['rating'].'<br><br>';
+    echo "REVIEWS:  ".$p['review'].'<br><br>';
+    echo "PRICE:  ".$p['price'].'<br><br>'; ?>
+     <img src="{{$p['image']}}"></img>
+<?php }
+    ?>
+
+
     
- }
+</div>
+@endsection
+
 

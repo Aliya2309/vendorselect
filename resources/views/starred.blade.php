@@ -1,6 +1,6 @@
 Here are your starred products:
-
-@foreach($sproducts as $i)
-
-<?php echo $i ?>
-@endforeach
+<?php
+foreach($sproducts as $i)
+{
+ echo $i ;
+}

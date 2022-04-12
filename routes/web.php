@@ -24,10 +24,12 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 //routes to function searchbar which searches product (runs the scrapper tool)
 Route::post('searchpage', 'App\Http\Controllers\UserController@searchbar');
 
+Route::get('addstarred/{pid}', 'App\Http\Controllers\UserController@addtostarred');
+
 //routes to the specific product page which will run sentiment algorithm as well as
 // give all info about the product
 Route::get('product/{id}', 'App\Http\Controllers\UserController@productinfo');
 
 Route::get('starred', 'App\Http\Controllers\UserController@starreditems');
 
-Route::get('addstarred/{$id}', 'App\Http\Controllers\UserController@addtostarred');
+//Route::get('addtostarred/{$id}', 'App\Http\Controllers\UserController@addtostarred');
