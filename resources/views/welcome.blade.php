@@ -13,26 +13,29 @@
  
     <section class="hero-section">
 
-    <div class="dash">
-            @if (Route::has('login'))
-                <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
-                    @auth
-                        <a href="{{ url('/dashboard') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Dashboard</a>
-                    @else
-                        <a href="{{ route('login') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Log in</a>
+    
 
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}" class="ml-4 text-sm text-gray-700 dark:text-gray-500 underline">Register</a>
-                        @endif
-                    @endauth
-                </div>
-</div>
-            @endif
       <div class="hero-text">
         <p class="mt">Vendor Selection Made Easy!</p>
         <h3 class="subt">Select from 1000s of prodcuts based on people's reviews</h3>
-       
+        <br>
+        
+    <div class="">
+            @if (Route::has('login'))
+                <div class="">
+                    @auth
+                        <a href="{{ url('/dashboard') }}" >Dashboard</a>
+                    @else
+                        <a href="{{ route('login') }}">Log in</a>
+
+                        @if (Route::has('register'))
+                            <a href="{{ route('register') }}">Register</a>
+                        @endif
+                    @endauth
+                </div>
+                @endif
       </div>
+</div>
     </section>
   </body>
   <style>
@@ -138,7 +141,7 @@ font-weight: bold;
   font-weight: 900;
   font-size: var(--text);
   padding: 0.8rem 1rem;
-  margin: 0.8rem auto;
+  margin: 0.8rem;
   display: block;
   text-decoration: none;
   transition: opacity 250ms linear;

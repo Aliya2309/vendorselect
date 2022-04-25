@@ -98,19 +98,22 @@ class UserController extends Controller
         $user=auth()->user();
         $uid = $user -> id;
         $sproducts = StarredItem::where('user_id', $uid)->get();
-        echo $sproducts;
+
+        
+
         return view('starred', ['sproducts'=>$sproducts]);
     }
 
     public function addtostarred($pid){
         $user=auth()->user();
         $uid = $user -> id;
-        echo "hello";
+ 
 
         //creating new object of starred items model
         $s_db = new StarredItem;
 
         //adding all info in object
+        //echo $pid;
         $selected_product = Product::where('id', $pid)->get();
         foreach($selected_product as $selected_product)
         {
@@ -126,8 +129,10 @@ class UserController extends Controller
         //save in db
 
         $s_db->save();
+        
 
-        app('App\Http\Controllers\UserController')->starreditems();
+        //app('App\Http\Controllers\UserController')->starreditems();
+        return view('addstarred');
 
     }
 }
