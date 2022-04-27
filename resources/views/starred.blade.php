@@ -45,12 +45,14 @@ foreach($sproducts as $p){
                 </h3>
                 <p class="product-text price"><?php echo "PRICE:  ".$p['price']; ?></p>
                 <p class="product-text genre"><?php  echo "RATINGS:  ".$p['rating']; ?></p>
+                
             </div>
         </div>
         </div>
 
         </div>
-    
+        <img class="starredimg" src="https://img.icons8.com/emoji/32/000000/star-emoji.png"/>
+          
     <?php } ?>
     <script>
         $("#view").click(function () {
@@ -193,6 +195,13 @@ foreach($sproducts as $p){
 
         .product .genre {
             font-size: 14px;
+        }
+
+        .starredimg{
+            display:inline;
+            position:absolute;
+            margin-left:90%;
+            margin-top:-80px;
         }
 
 

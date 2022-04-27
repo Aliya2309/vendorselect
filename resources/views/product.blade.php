@@ -9,6 +9,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
 </head>
 <body>
 <?php
@@ -73,7 +74,10 @@ foreach($product as $product)
     alt="">
   <figcaption><?php echo $product['name']; 
       ?></figcaption>
-      <a href="/addstarred/{{$product['id']}}"> Add this product to your starred items </a>
+      <br>
+      <a href="/addstarred/{{$product['id']}}"> Add this product to your starred items </a><a href="/addstarred/{{$product['id']}}"><img src="https://img.icons8.com/emoji/32/000000/star-emoji.png"/>
+      </a>
+      
 </figure>
     
 </div>
